@@ -36,9 +36,7 @@ namespace WinFormUI
 
         private void WireUpPeopleList()
         {
-            //listPeopleListBox.DataSource = null;
-            //listPeopleListBox.DataSource = people;
-            //listPeopleListBox.DisplayMember = "FullName";
+
         }
 
         private void refreshListButton_Click(object sender, EventArgs e)
@@ -54,12 +52,10 @@ namespace WinFormUI
 
                 p.UserId = firstNameText.Text;
                 int count = 0;
-                // SqliteDataAccess.SavePerson(p);
                 count = SqliteDataAccess.SearchPerson(p);
 
                 if (count == 0)
                 {
-                    //int locPersonId=SqliteDataAccess.SavePerson(p);
                     SecurityQuestions frmSecurityQuestions = new SecurityQuestions();
                     frmSecurityQuestions.personName = firstNameText.Text;
                     frmSecurityQuestions.ShowDialog();
@@ -86,14 +82,6 @@ namespace WinFormUI
 
         }
 
-       /* private void button1_Click(object sender, EventArgs e)
-        {
-            PersonModel p = new PersonModel();
-
-            p.UserId = firstNameText.Text;
-            
-            TestSearch.Text = SqliteDataAccess.SearchPerson(p).ToString();
-        }*/
 
         private void listPeopleListBox_SelectedIndexChanged(object sender, EventArgs e)
         {

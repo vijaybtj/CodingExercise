@@ -78,17 +78,14 @@ namespace WinFormUI
                 String msg;
                 List<SecAnswersModel> lstSam = new List<SecAnswersModel>();
                 SecAnswersModel sam1 = new SecAnswersModel();
-                //sam1.PersonId = personId;
                 sam1.QuestionId = cmbQuestion1.SelectedIndex;
                 sam1.Answer = txtAnswer1.Text;
 
                 SecAnswersModel sam2 = new SecAnswersModel();
-                //sam2.PersonId = personId;
                 sam2.QuestionId = cmbQuestion2.SelectedIndex;
                 sam2.Answer = txtAnswer2.Text;
 
                 SecAnswersModel sam3 = new SecAnswersModel();
-                // sam3.PersonId = personId;
                 sam3.QuestionId = cmbQuestion3.SelectedIndex;
                 sam3.Answer = txtAnswer3.Text;
 
@@ -99,12 +96,10 @@ namespace WinFormUI
 
                 msg = SqliteDataAccess.SaveSecurityAnswers(lstSam, personName);
 
-                //MessageBox.Show(msg, "Title");
-                //  this.Close();
+               
 
                 if (msg != "Success")
                 {
-                    //MessageBox.Show(msg, "Title");
                     DialogResult intResponse;
                     intResponse = MessageBox.Show(msg + "  Do you want to try again?", "Save Status", MessageBoxButtons.YesNo);
                     if (intResponse == DialogResult.No)

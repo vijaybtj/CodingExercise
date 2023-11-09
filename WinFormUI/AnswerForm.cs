@@ -48,15 +48,11 @@ namespace WinFormUI
             if (quesCount < 3 && textBox1.Text == lstSecAns[quesCount].Answer)
             {
                 DialogResult intResponse;
-                //MessageBox.Show("Congratulations " + user + " !! You will be routed to main page", "Title");
                 intResponse = MessageBox.Show("Congratulations " + user + " !! Do you want to update the answers?", "Correct Answer", MessageBoxButtons.YesNo);
-                //PeopleForm pf = new PeopleForm();
-                //pf.ShowDialog();
-                //MessageBox.Show("Response " + intResponse, "Title");
+
                 if (intResponse == DialogResult.Yes)
                 {
                     UpdateSecurityQuestions frmupdSecurityQuestions = new UpdateSecurityQuestions(lstSecAns);
-                   // frmupdSecurityQuestions.personName = firstNameText.Text;
                     frmupdSecurityQuestions.ShowDialog();
                     this.Close();
                 }
