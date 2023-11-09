@@ -58,16 +58,13 @@ namespace DemoLibrary
 
         public static String SaveSecurityAnswers(List<SecAnswersModel> lstAnswers, String varUserName)
         {
-            //IDbTransaction objTrans = null;
             PersonModel p = new PersonModel();
             p.UserId = varUserName;
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                //objTrans = cnn.BeginTransaction();
                 cnn.Open();
                 using (var tran = cnn.BeginTransaction())
                 {
-                    //int personID = SavePerson(p);
                     cnn.Execute("insert into Person (UserId) values (@UserId)", p);
                     List<PersonModel> output = cnn.Query<PersonModel>($"select id from Person where UserId = '{p.UserId}'").ToList();
                     int personID = output[0].Id;
@@ -79,19 +76,16 @@ namespace DemoLibrary
                             cnn.Execute("insert into SecAnswers(PersonId, QuestionId, Answer) values (@PersonId,@QuestionId,@Answer)", lstAnswers[i]);
                         }
                         tran.Commit();
-                       // objTrans.Commit();
 
                     }
                     catch (Exception ex)
                     {
                         tran.Rollback();
-                        //objTrans.Rollback();
                         return ex.Message;
                     }
                     finally
                     {
                         tran.Dispose();
-                        //objTrans.Dispose();
                     }
                 }
                 return "Success";
@@ -102,19 +96,14 @@ namespace DemoLibrary
 
         public static String updateSecurityAnswers(List<SecAnswersModel> lstAnswers, int varUserName)
         {
-            //IDbTransaction objTrans = null;
-            //PersonModel p = new PersonModel();
             int UserId = varUserName;
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                //objTrans = cnn.BeginTransaction();
                 cnn.Open();
                 using (var tran = cnn.BeginTransaction())
                 {
-                    //int personID = SavePerson(p);
                     cnn.Execute($"delete from SecAnswers where PersonId= '{UserId}'");
-                    //List<PersonModel> output = cnn.Query<PersonModel>($"select id from Person where UserId = '{p.UserId}'").ToList();
-                    //int personID = output[0].Id;
+                    
                     try
                     {
                         for (int i = 0; i < lstAnswers.Count; i++)
@@ -123,19 +112,16 @@ namespace DemoLibrary
                             cnn.Execute("insert into SecAnswers(PersonId, QuestionId, Answer) values (@PersonId,@QuestionId,@Answer)", lstAnswers[i]);
                         }
                         tran.Commit();
-                        // objTrans.Commit();
 
                     }
                     catch (Exception ex)
                     {
                         tran.Rollback();
-                        //objTrans.Rollback();
                         return ex.Message;
                     }
                     finally
                     {
                         tran.Dispose();
-                        //objTrans.Dispose();
                     }
                 }
                 return "Success";
