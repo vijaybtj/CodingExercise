@@ -1,0 +1,18 @@
+//Create Database with name DemoDB.db in SQLite 
+
+CREATE TABLE "Person" (
+Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+UserId TEXT NOT NULL UNIQUE
+);
+CREATE TABLE Questions (
+Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+Question TEXT NOT NULL
+);
+CREATE TABLE "SecAnswers" (
+PersonId INTEGER,
+QuestionId INTEGER,
+Answer TEXT,
+FOREIGN KEY(PersonId) REFERENCES Person(Id),
+FOREIGN KEY(QuestionId) REFERENCES Questions(Id),
+UNIQUE(PersonId,QuestionId)
+);
